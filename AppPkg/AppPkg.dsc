@@ -34,6 +34,8 @@
   DEFINE DEBUG_PRINT_ERROR_LEVEL  = 0x80000040  # Flags to control amount of debug output
   DEFINE DEBUG_PROPERTY_MASK      = 0
 
+  DEFINE UEFI_BOOK_DIR            = book
+
 [PcdsFeatureFlag]
 
 [PcdsFixedAtBuild]
@@ -85,6 +87,10 @@
 
   CacheMaintenanceLib|MdePkg/Library/BaseCacheMaintenanceLib/BaseCacheMaintenanceLib.inf
 
+  LibGui|$(UEFI_BOOK_DIR)/GUIPkg/Library/UGui.inf
+  LibCpp|$(UEFI_BOOK_DIR)/CppPkg/Library/CppLib.inf
+  
+  CppLib|$(UEFI_BOOK_DIR)/CppPkg/Library/CppLib.inf
 ###################################################################################################
 #
 # Components Section - list of the modules and components that will be processed by compilation
@@ -129,12 +135,21 @@
 #### Un-comment the following line to build Python 2.7.2.
 #  AppPkg/Applications/Python/PythonCore.inf
 
+  #$(UEFI_BOOK_DIR)/ffmpeg/ffplayer/fplayer.inf
+  #$(UEFI_BOOK_DIR)/GcppPkg/test/testcpp.inf 
+  $(UEFI_BOOK_DIR)/std/main.inf
+  $(UEFI_BOOK_DIR)/infs/main/main.inf
 #### Un-comment the following line to build Python 2.7.10.
 # AppPkg/Applications/Python/Python-2.7.10/Python2710.inf
 
 #### Un-comment the following line to build Lua.
 #  AppPkg/Applications/Lua/Lua.inf
 
+  #$(UEFI_BOOK_DIR)/CppPkg/test/testcpp.inf
+  $(UEFI_BOOK_DIR)/disk/DevicePath/TestDevicePath.inf
+  $(UEFI_BOOK_DIR)/disk/AtaPassThru/TestPassThru.inf
+  $(UEFI_BOOK_DIR)/audio/audio.inf
+  $(UEFI_BOOK_DIR)/systemtable/memory/BSmem.inf
 
 ##############################################################################
 #
@@ -150,3 +165,6 @@
 ##############################################################################
 !include StdLib/StdLib.inc
 !include AppPkg/Applications/Sockets/Sockets.inc
+[Components.X64]
+  $(UEFI_BOOK_DIR)/audio/testac97.inf
+
